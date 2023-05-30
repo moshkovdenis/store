@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: '1'
+      author: moshkov_d
+
+  - include:
+      file: create_table_customer.sql
+      relativeToChangelogFile: true
+
+  - changeSet:
+      id: '2'
+      author: moshkov_d
+
+  - include:
+      file: insert_values_customer.sql
+      relativeToChangelogFile: true
