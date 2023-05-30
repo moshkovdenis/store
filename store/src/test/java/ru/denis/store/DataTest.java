@@ -9,6 +9,7 @@ public class DataTest {
         return CustomerDTO.builder()
                 .id(1L)
                 .name("Test")
+                .login("test")
                 .age(25)
                 .build();
     }
@@ -17,6 +18,7 @@ public class DataTest {
         return Customer.builder()
                 .id(1L)
                 .name("Test")
+                .login("test")
                 .age(25)
                 .build();
     }
