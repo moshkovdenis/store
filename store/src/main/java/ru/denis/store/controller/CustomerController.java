@@ -22,7 +22,7 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.findAllCustomers());
     }
 
-    @GetMapping("/findByLogin")
+    @GetMapping("/find-by-login")
     public ResponseEntity<?> findCustomerByLogin(@RequestParam("login") String login) {
         Optional<CustomerDTO> customer = customerService.findCustomerByLogin(login);
         return customer.isPresent() ? ResponseEntity.ok(customer) : ResponseEntity.notFound().build();

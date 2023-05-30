@@ -30,7 +30,7 @@ class CustomerControllerTest extends AbstractControllerTest {
     @Test
     @SneakyThrows
     void findCustomerByLogin_ExpectFindCustomerByLogin() {
-        mvc.perform(get("/api/v1/customer/findByLogin")
+        mvc.perform(get("/api/v1/customer/find-by-login")
                 .param("login", "Oleg")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -41,7 +41,7 @@ class CustomerControllerTest extends AbstractControllerTest {
     @Test
     @SneakyThrows
     void findCustomerByLogin_ExpectNotFindCustomerByLogin() {
-        mvc.perform(get("/api/v1/customer/findByLogin")
+        mvc.perform(get("/api/v1/customer/find-by-login")
                         .param("login", "kasdfkasdhfk")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())

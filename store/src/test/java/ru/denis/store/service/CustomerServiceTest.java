@@ -12,9 +12,11 @@ import ru.denis.store.mapper.CustomerMapper;
 import ru.denis.store.repository.CustomerRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
 
@@ -41,4 +43,24 @@ class CustomerServiceTest {
         log.info(customers.toString());
     }
 
+    @Test
+    void findCustomerByLogin_ExpectFindCustomerByLogin() {
+        when(customerRepository.findCustomerByLogin(anyString()))
+                .thenReturn(Optional.of(DataTest.getCustomer()));
+        when(customerMapper.customerToDto(any()))
+                .thenReturn(DataTest.getCustomerDTO());
+        Optional<CustomerDTO> customer = customerService.findCustomerByLogin(anyString());
+        assertThat(customer)
+                .isPresent();
+        log.info(customer.toString());
+    }
+
+    @Test
+    void findCustomerByLogin_ExpectNotFindCustomerByLogin() {
+        when(customerRepository.findCustomerByLogin(anyString()))
+                .thenReturn(Optional.empty());
+        Optional<CustomerDTO> customer = customerService.findCustomerByLogin(anyString());
+        assertThat(customer)
+                .isEmpty();
+    }
 }
