@@ -22,3 +22,11 @@ databaseChangeLog:
   - include:
       file: task_001.sql
       relativeToChangelogFile: true
+
+  - changeSet:
+      id: '4'
+      author: dyachkov_s
+
+  - include:
+      file: task_002.sql
+      relativeToChangelogFile: true
