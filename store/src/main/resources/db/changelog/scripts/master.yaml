@@ -14,3 +14,11 @@ databaseChangeLog:
   - include:
       file: insert_values_customer.sql
       relativeToChangelogFile: true
+
+  - changeSet:
+      id: '3'
+      author: dyachkov_s
+
+  - include:
+      file: task_001.sql
+      relativeToChangelogFile: true
