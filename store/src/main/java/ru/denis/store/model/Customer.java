@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "customer")
 @AllArgsConstructor
@@ -16,7 +18,7 @@ import lombok.Setter;
 @Setter
 public class Customer {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "name")
     private String name;
@@ -24,7 +26,7 @@ public class Customer {
     private Integer age;
     @Column(name = "login")
     private String login;
-    @OneToOne(mappedBy = "customer")
-    private Basket basket;
+    @OneToMany(mappedBy = "customer")
+    private Set<Basket> basket;
 
 }

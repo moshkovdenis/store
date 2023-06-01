@@ -31,7 +31,7 @@ class CustomerControllerTest extends AbstractControllerTest {
     @SneakyThrows
     void findCustomerByLogin_ExpectFindCustomerByLogin() {
         mvc.perform(get("/api/v1/customer/find-by-login")
-                .param("login", "Oleg")
+                .param("login", "Ivan")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print())

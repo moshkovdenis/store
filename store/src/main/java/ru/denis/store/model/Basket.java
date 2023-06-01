@@ -1,9 +1,24 @@
 package ru.denis.store.model;
 
-import jakarta.persistence.*;
 
-import lombok.*;
-import java.util.Set;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Table(name = "basket")
@@ -14,14 +29,16 @@ import java.util.Set;
 @Setter
 public class Basket {
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "catalog_id", referencedColumnName = "id")
-    private Set<Catalog> catalogs;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "basket")
+    private List<BasketCatalog> basketCatalogs;
+
+    @Column(name = "completed")
+    private Boolean completed;
 }

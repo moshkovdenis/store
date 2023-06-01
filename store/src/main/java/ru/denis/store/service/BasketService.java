@@ -2,6 +2,8 @@ package ru.denis.store.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import ru.denis.store.dto.BasketCatalogDTO;
+import ru.denis.store.dto.BasketDTO;
 import ru.denis.store.dto.CustomerDTO;
 import ru.denis.store.mapper.CatalogMapper;
 import ru.denis.store.mapper.CustomerMapper;
@@ -32,16 +34,17 @@ public class BasketService {
     }
 
     public Integer getTotalCost(String login) {
-
         Optional<CustomerDTO> customer = customerService.findCustomerByLogin(login);
-        if(customer.isPresent()) {
-            Basket basket = customer.get().getBasket();
-            return basket.getCatalogs()
-                    .stream()
-                    .map(Catalog::getCount)
-                    .reduce(Integer::sum)
-                    .get();
-        }
-        return 0;
+        return customer
+                .map(customerDTO -> customerDTO.getBasket()
+                        .stream()
+                        .filter(basket -> !basket.getCompleted())
+                        .toList()
+                        .stream().findFirst().orElseThrow()
+                        .getBasketCatalogs()
+                        .stream()
+                        .map(basketCatalog -> basketCatalog.getCatalog().getPrice())
+                        .reduce(Integer::sum)
+                        .orElse(0)).orElse(0);
     }
 }

@@ -35,8 +35,8 @@ public class BasketController {
         }
     }
 
-    @GetMapping("/{login}/totalcost")
-    public ResponseEntity<Integer> getTotalCost(@PathVariable String login) {
+    @GetMapping("/total-cost")
+    public ResponseEntity<Integer> getTotalCost(@RequestParam("login") String login) {
         Integer totalCost = basketService.getTotalCost(login);
         return new ResponseEntity<>(totalCost, HttpStatus.OK);
     }

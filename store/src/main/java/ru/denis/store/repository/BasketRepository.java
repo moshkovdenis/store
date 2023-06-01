@@ -19,5 +19,4 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
     @Query(value = "DELETE FROM basket_catalog WHERE basket_id = ?1 AND catalog_id = ?2", nativeQuery = true)
     void removeCatalogFromBasket(Long basketId, Long catalogId);
 
-    Basket getDistinctByCustomer_Id(Long customer);
 }
